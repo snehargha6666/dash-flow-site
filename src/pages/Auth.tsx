@@ -38,24 +38,30 @@ export default function Auth() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background p-4">
-      <Card className="w-full max-w-md">
-        <CardHeader className="text-center">
-          <CardTitle className="text-2xl font-bold">
-            {isSignUp ? 'Create Account' : 'Welcome Back'}
+    <div className="min-h-screen flex items-center justify-center bg-gradient-hero p-4">
+      <div className="absolute inset-0 bg-background/80 backdrop-blur-sm"></div>
+      <Card className="relative w-full max-w-md shadow-large border-0 bg-card/90 backdrop-blur">
+        <CardHeader className="text-center space-y-4">
+          <div className="mx-auto w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center shadow-glow">
+            <svg className="w-8 h-8 text-primary-foreground" fill="currentColor" viewBox="0 0 20 20">
+              <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
+            </svg>
+          </div>
+          <CardTitle className="text-3xl font-bold bg-gradient-primary bg-clip-text text-transparent">
+            {isSignUp ? 'Join Us' : 'Welcome Back'}
           </CardTitle>
-          <CardDescription>
+          <CardDescription className="text-lg">
             {isSignUp
-              ? 'Sign up to get started with your account'
-              : 'Sign in to access your dashboard'
+              ? 'Create your account and start your journey'
+              : 'Sign in to access your beautiful dashboard'
             }
           </CardDescription>
         </CardHeader>
-        <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-4">
+        <CardContent className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-5">
             {isSignUp && (
               <div className="space-y-2">
-                <Label htmlFor="fullName">Full Name</Label>
+                <Label htmlFor="fullName" className="text-sm font-semibold">Full Name</Label>
                 <Input
                   id="fullName"
                   type="text"
@@ -63,11 +69,12 @@ export default function Auth() {
                   value={fullName}
                   onChange={(e) => setFullName(e.target.value)}
                   required
+                  className="h-12 shadow-soft"
                 />
               </div>
             )}
             <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor="email" className="text-sm font-semibold">Email</Label>
               <Input
                 id="email"
                 type="email"
@@ -75,10 +82,11 @@ export default function Auth() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
+                className="h-12 shadow-soft"
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
+              <Label htmlFor="password" className="text-sm font-semibold">Password</Label>
               <Input
                 id="password"
                 type="password"
@@ -87,17 +95,23 @@ export default function Auth() {
                 onChange={(e) => setPassword(e.target.value)}
                 required
                 minLength={6}
+                className="h-12 shadow-soft"
               />
             </div>
-            <Button type="submit" className="w-full" disabled={loading}>
-              {loading ? 'Loading...' : (isSignUp ? 'Sign Up' : 'Sign In')}
+            <Button 
+              type="submit" 
+              className="w-full h-12 bg-gradient-primary hover:shadow-glow transition-all duration-300 font-semibold text-lg" 
+              disabled={loading}
+            >
+              {loading ? 'Loading...' : (isSignUp ? 'Create Account' : 'Sign In')}
             </Button>
           </form>
-          <div className="mt-6 text-center">
+          <div className="text-center">
             <Button
               variant="ghost"
               onClick={() => setIsSignUp(!isSignUp)}
               type="button"
+              className="text-primary hover:text-primary/80"
             >
               {isSignUp
                 ? 'Already have an account? Sign in'
